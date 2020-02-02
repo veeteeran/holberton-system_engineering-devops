@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -printf %f\\n
+find . -size 0b
