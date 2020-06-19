@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+# Displays Holberton School 10 times, Hi after the 9th
+str="Holberton School"
+counter=0
+while [ $counter -lt 10 ]
+do
+    if [ "$counter" -eq 9 ]
+      then
+        echo "Hi"
+
+    fi
+    echo "$str"
+    ((counter++))
+done
