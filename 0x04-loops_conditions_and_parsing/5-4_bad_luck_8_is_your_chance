@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Loops from 1 to 10 and display below
 str="Holberton School"
 bl="bad luck"
 gl="good luck"
