@@ -2,7 +2,7 @@
 # displays the time for 12 hours and 59 minutes
 hour=0
 minute=0
-while [ $hour -lt 24 ]
+while [ $hour -lt 13 ]
   do
     echo "Hour: $hour"
     minute=1
