@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+# Displays the content of the file /etc/passwd
+my_file="/etc/passwd"
+while IFS= read -r line
+  do
+    user="$(cut -d ':' -f1 <<< "$line")"
+    password="$(cut -d ':' -f2 <<< "$line")"
+    uid="$(cut -d ':' -f3 <<< "$line")"
+    gid="$(cut -d ':' -f4 <<< "$line")"
+    u_info="$(cut -d ':' -f5 <<< "$line")"
+    home_dir="$(cut -d ':' -f6 <<< "$line")"
+    shell="$(cut -d ':' -f7 <<< "$line")"
+    echo "The user $user is part of the $gid gang, lives in $home_dir and rides $shell. $uid's pace is protected by the passcode $password, more info about the user here: $u_info"
+  done < "$my_file"
