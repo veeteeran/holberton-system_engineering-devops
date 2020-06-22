@@ -1,1 +1,19 @@
 #!/usr/bin/env bash
+# Process and PID file
+echo $$ > /var/run/holbertonscript.pid
+sigterm() {
+	echo "I hate the kill command"
+	rm -r "/var/run/holbertonscript.pid"
+	exit
+}
+
+sigint() {
+	echo "Y U no love me?!"
+	exit
+}
+trap sigterm SIGTERM SIGQUIT
+trap sigint SIGINT
+while true
+  do
+    echo "To infinity and beyond"
+  done
