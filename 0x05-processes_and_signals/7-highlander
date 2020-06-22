@@ -1,1 +1,11 @@
 #!/usr/bin/env bash
+# Displays Tiab Iai when SIGTERM received
+invincible() {
+	echo "I am invincible!!!"
+}
+trap invincible SIGTERM
+while true
+  do
+    echo "To infinity and beyond"
+    sleep 2
+  done
