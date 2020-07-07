@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Displays all active IPv4 IPs on the machine it’s executed on
+ifconfig eth0 | head -n2 | tail -n +2 | cut -d ":" -f2 | cut -d " " -f1
+ifconfig lo | head -n2 | tail -n +2 | cut -d ":" -f2 | cut -d " " -f1
