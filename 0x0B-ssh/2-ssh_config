@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-
+# Config file to connect to a server without typing a password
+Host 35.190.170.193
+        HostName 35.190.170.193
+        User ubuntu
+        IdentityFile ~/.ssh/holberton
+        PasswordAuthentication no
