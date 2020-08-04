@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+# configures a new Ubuntu machine
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo echo "
+<html>
+    <head>
+        <title>Holberton School test</title>
+    </head>
+    <body>
+        <h1>Holberton School</h1>
+    </body>
+</html>" 
