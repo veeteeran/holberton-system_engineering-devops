@@ -4,6 +4,6 @@ source_file="/etc/nginx/sites-available/default"
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
-sudo echo "Holberton School" > /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.html
 sudo sed -i '/^\tserver_name.*/a \\trewrite ^\/redirect_me https:\/\/www.google.com permanent;' $source_file
 sudo service nginx restart
