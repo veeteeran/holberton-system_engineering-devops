@@ -3,12 +3,5 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
-sudo echo "
-<html>
-    <head>
-        <title>Holberton School test</title>
-    </head>
-    <body>
-        <h1>Holberton School</h1>
-    </body>
-</html>" 
+sudo echo "Holberton School" >> /var/www/html/index.html
+sudo systemctl restart nginx
