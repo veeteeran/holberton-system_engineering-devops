@@ -1,1 +1,11 @@
 #!/usr/bin/env bash
+# configures a new Ubuntu machine
+source_file="/etc/nginx/sites-available/default"
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sudo sed -i '/^\tserver_name.*/a \\trewrite ^\/redirect_me https:\/\/www.google.com permanent;' $source_file
+sudo sed -i '/^\tserver_name.*/a \\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/html/errors/404;\n\t\tinternal;\n\t}' $source_file
+sudo service nginx restart
