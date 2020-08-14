@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Configure HAproxy with version equal or greater than 1.5
-apt-get update
-apt-get install haproxy=1.8.\*
+# Another line of comment
+apt-get -y update
+apt-get -y install haproxy
 
 host1=$(curl -sI 35.190.170.193 | grep X-Served-By | awk '{ print $2 }' | rev | cut -c 2- | rev)
 host2=$(curl -sI 3.80.222.135 | grep X-Served-By | awk '{ print $2 }' | rev | cut -c 2- | rev)
