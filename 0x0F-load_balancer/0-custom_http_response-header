@@ -1,1 +1,12 @@
 #!/usr/bin/env bash
+# Configure web-02 to be identical to web-01
+source_file="/etc/nginx/sites-available/default"
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo "Holberton School" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sed -i '/^\tserver_name.*/a \\trewrite ^\/redirect_me https:\/\/www.google.com permanent;' $source_file
+sed -i '/^\tserver_name.*/a \\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/html/;\n\t\tinternal;\n\t}' $source_file
+sed -i '/^\tserver_name.*/a \\tadd_header X-Served-By $hostname;\n' $source_file
+service nginx restart
