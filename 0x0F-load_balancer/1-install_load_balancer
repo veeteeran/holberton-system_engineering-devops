@@ -4,4 +4,6 @@ apt-get install software-properties-common
 add-apt-repository ppa:vbernat/haproxy-1.8
 apt-get update
 apt-get install haproxy=1.8.\*
-service nginx restart
+echo '\nfrontend http-in\n\tbind *:80\n\tmode http\n\tdefault_backend webservers' >> /etc/haproxy/haproxy.cfg
+echo 'backend webservers\n\tbalance roundrobin\n\tmode http\n\tserver web01 35.190.170.193:80 check\n\tserver web2 3.80.222.135:80 check\n' >> /etc/haproxy/haproxy.cfg
+service haproxy restart
