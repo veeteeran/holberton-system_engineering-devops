@@ -4,6 +4,22 @@ apt-get install software-properties-common
 add-apt-repository ppa:vbernat/haproxy-1.8
 apt-get update
 apt-get install haproxy=1.8.\*
-echo '\nfrontend http-in\n\tbind *:80\n\tmode http\n\tdefault_backend webservers' >> /etc/haproxy/haproxy.cfg
-echo 'backend webservers\n\tbalance roundrobin\n\tmode http\n\tserver web01 35.190.170.193:80 check\n\tserver web2 3.80.222.135:80 check\n' >> /etc/haproxy/haproxy.cfg
+
+host1=$(curl -sI 35.190.170.193 | grep X-Served-By | awk '{ print $2 }' | rev | cut -c 2- | rev)
+host2=$(curl -sI 3.80.222.135 | grep X-Served-By | awk '{ print $2 }' | rev | cut -c 2- | rev)
+
+cat >> /etc/haproxy/haproxy.cfg << EOF
+frontend http-in
+	mode http
+	bind *:80
+	default_backend webservers
+
+backend webservers
+	balance roundrobin
+	server ${host1} 35.190.170.193:check
+	server ${host2} 3.80.222.135:check
+
+EOF
+
+echo -e '\n#Enable HAProxy to be started by the init script\nENABLED=1' >> /etc/default/haproxy
 service haproxy restart
