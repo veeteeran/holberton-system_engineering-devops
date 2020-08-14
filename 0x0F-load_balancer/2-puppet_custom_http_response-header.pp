@@ -10,12 +10,7 @@ service { 'nginx':
     restart => 'sudo service nginx restart',
 }
 
-file { '/var/www/html/index.html':
-    ensure  => file,
-    content => 'Holberton School',
-}
-
-file_line { '301 redirect':
+file_line { 'Create a custom HTTP header':
     ensure => 'present',
     path   => '/etc/nginx/sites-available/default',
     line   => add_header X-Served-By $hostname;
