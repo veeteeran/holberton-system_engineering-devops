@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # Configure HAproxy with version equal or greater than 1.5
-apt-get install software-properties-common
-add-apt-repository ppa:vbernat/haproxy-1.8
 apt-get update
 apt-get install haproxy=1.8.\*
 
@@ -16,8 +14,8 @@ frontend http-in
 
 backend webservers
 	balance roundrobin
-	server ${host1} 35.190.170.193:check
-	server ${host2} 3.80.222.135:check
+	server ${host1} 35.190.170.193:80 check
+	server ${host2} 3.80.222.135:80 check
 
 EOF
 
