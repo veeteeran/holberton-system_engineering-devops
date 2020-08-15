@@ -10,6 +10,10 @@ service { 'nginx':
     restart => 'sudo service nginx restart',
 }
 
+file {'/etc/nginx/sites-available/default':
+    ensure => file
+}
+
 file_line { 'Create a custom HTTP header':
     ensure => 'present',
     path   => '/etc/nginx/sites-available/default',
