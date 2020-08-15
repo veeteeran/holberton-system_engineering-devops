@@ -1,4 +1,8 @@
 # Create custom HTTP header response using Puppet
+exec { 'update':
+    command => "/usr/bin/apt-get -y update"
+}
+
 package { 'nginx':
     ensure   => installed,
     provider => 'apt',
