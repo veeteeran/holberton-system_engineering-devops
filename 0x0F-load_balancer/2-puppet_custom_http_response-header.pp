@@ -10,13 +10,7 @@ service { 'nginx':
     restart => 'sudo service nginx restart',
 }
 
-file {'/etc/nginx/sites-available/default':
-    ensure => file
-}
-
-file_line { 'Create a custom HTTP header':
-    ensure => 'present',
-    path   => '/etc/nginx/sites-available/default',
-    line   => add_header X-Served-By $hostname;
-    after  => 'server_name _;'
+exec {
+    path => '/etc/nginx/sites-available/default',
+    command => "sed -i '/^\tserver_name.*/a \\tadd_header X-Served-By ${hostname};\n' /etc/nginx/sites-available/default"
 }
