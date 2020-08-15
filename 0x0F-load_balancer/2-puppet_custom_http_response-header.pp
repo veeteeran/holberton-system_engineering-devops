@@ -11,5 +11,5 @@ service { 'nginx':
 }
 
 exec { 'Create custom HTTP header':
-    command => "/usr/bin/env bash sed -i '/^\tserver_name.*/a \\tadd_header X-Served-By ${hostname};\n' /etc/nginx/sites-available/default"
+    command => "/usr/bin/env bash sed -i '/^\tserver_name.*/a \\\tadd_header X-Served-By ${hostname};\n' /etc/nginx/sites-available/default"
 }
