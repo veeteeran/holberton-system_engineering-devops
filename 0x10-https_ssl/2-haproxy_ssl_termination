@@ -1,1 +1,66 @@
-#!/usr/bin/env bash
+global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        daemon
+
+        # Default SSL material locations
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
+
+        # Default ciphers to use on SSL-enabled listening sockets.
+        # For more information, see ciphers(1SSL). This list is from:
+        #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+        # An alternative list with additional directives can be obtained from
+        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+ssl-default-bind-options no-sslv3
+        #added this for 0x10 task 2
+        maxconn 2048
+        #added this for 0x10 task 2
+        tune.ssl.default-dh-param 2048
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+        # Two line below added for 0x10 task 2
+        option forwardfor
+        option http-server-close
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+# Original config before changes for 0x10 task 2
+#frontend http-in
+#        mode http
+#        bind *:80
+#        default_backend webservers
+
+#backend webservers
+#        balance roundrobin
+#        server gc-1669-web-01-1596432914 35.190.170.193:80 check
+#        server 1669-web-02 3.80.222.135:80 check
+
+# These lines added for 0x10 task 2
+frontend www-http
+        bind 18.232.139.217:80
+        reqadd X-Forwarded-Proto:\ http
+        default_backend www-backend
+
+frontend www-https
+        bind 18.232.139.217:443 ssl crt /etc/haproxy/certs/viet-tran.tech.pem
+        reqadd X-Forwarded-Proto:\ https
+        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+        use_backend letsencrypt-backend if letsencrypt-acl
+        default_backend www-backend
