@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # 7 lines or less
-sudo chown -R nginx:nginx /etc/nginx/
-sudo chmod 0700 /etc/nginx/nginx.conf
-sudo sed -e -i '4a user nginx;' /etc/nginx/nginx.conf -e -i 's/80/8080/' /etc/nginx/sites-available/default
-sudo pkill apache2
+sudo chmod 0777 /etc/nginx/nginx.conf
+sed -i 's/80/8080/' /etc/nginx/sites-available/default
+pkill apache2
 sudo -u nginx service nginx restart
