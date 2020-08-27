@@ -4,16 +4,18 @@ exec { 'update':
 }
 
 package { 'nginx':
-    ensure   => installed,
+    ensure   => 'installed',
     provider => 'apt',
+    require => Exec['update']
 }
 
 exec { 'Create custom HTTP header':
     command => "/usr/bin/env sed -i '/^\tserver_name.*/a \\\tadd_header X-Served-By ${hostname};\n' /etc/nginx/sites-available/default"
+    require => Package['nginx']
 }
 
-service { 'nginx':
+service { 'restart':
     ensure  => running,
-    require => Package['nginx'],
+    require => Exec['Create custom HTTP header'],
     restart => 'sudo service nginx restart',
 }
