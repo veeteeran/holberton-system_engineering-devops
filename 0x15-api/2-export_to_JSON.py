@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Building on task 0, export data in the CSV format"""
 from sys import argv
-import csv
 from requests import get
 import json
 
