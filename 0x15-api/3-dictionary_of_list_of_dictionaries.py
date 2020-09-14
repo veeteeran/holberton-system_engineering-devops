@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-""" Building on task 0, export data in the CSV format"""
-from requests import get
+""" Building on task 0, export data in the JSON format"""
 import json
+from requests import get
 
 if __name__ == "__main__":
     name_url = 'https://jsonplaceholder.typicode.com/users'
