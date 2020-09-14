@@ -9,8 +9,9 @@ if __name__ == "__main__":
     todo_url = 'https://jsonplaceholder.typicode.com/todos?userId=' + argv[1]
     names = get(name_url).json()
     todos = get(todo_url)
+    filename = "{}.csv".format(argv[1])
 
-    with open('USER_ID.csv', 'w', newline='') as file:
+    with open(filename, 'w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         write_list = []
 

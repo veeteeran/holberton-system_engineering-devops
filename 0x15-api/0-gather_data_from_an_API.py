@@ -22,4 +22,4 @@ if __name__ == "__main__":
     print(line_1)
 
     for complete in completed_list:
-        print("\t{}".format(complete))
+        print("\t {}".format(complete))

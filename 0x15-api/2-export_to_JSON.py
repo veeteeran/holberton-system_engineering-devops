@@ -22,5 +22,6 @@ if __name__ == "__main__":
 
     output_dict.update({names.get("id"): write_list})
 
-    with open('USER_ID.json', 'w') as file:
+    filename = "{}.json".format(argv[1])
+    with open(filename, 'w') as file:
         json.dump(output_dict, file)
