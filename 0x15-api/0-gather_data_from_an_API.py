@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ for a given employee ID, returns information about TODO list progress """
-from sys import argv
 from requests import get
+from sys import argv
 
 if __name__ == "__main__":
     name_url = 'https://jsonplaceholder.typicode.com/users/' + argv[1]
