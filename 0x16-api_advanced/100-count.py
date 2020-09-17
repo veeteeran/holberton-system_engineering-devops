@@ -19,12 +19,12 @@ def count_words(subreddit, word_list=[], after=''):
     if stuff.get("data") and stuff['data'].get('children'):
         children = stuff.get("data").get("children")
         for child in children:
-            hot_list.append(child.get("data").get("title"))
+            word_list.append(child.get("data").get("title"))
 
         page = stuff.get("data").get("after")
         if page:
-            return recurse(subreddit, hot_list, page)
+            return count_words(subreddit, word_list, page)
 
-    if hot_list == []:
+    if word_list == []:
         return None
-    return hot_list
+    return word_list
