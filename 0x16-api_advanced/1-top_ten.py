@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" queries the Reddit API and returns the number of subscribers """
+""" Returns a list containing the titles of all hot articles
+    for a given subreddit. Must use recursion
+"""
 from requests import get
 
 
