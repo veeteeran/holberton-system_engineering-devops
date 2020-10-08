@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Gracful reload on gunicorn
+sudo kill -HUP $MAINPID
