@@ -1,8 +1,3 @@
 #!/usr/bin/env bash
 # Gracful reload on gunicorn
-# Reload a new master with new workers
-sudo kill -s USR2 $PID
-# Graceful stop old workers
-sudo kill -s WINCH $OLDPID
-# Graceful stop old master
-sudo kill -s QUIT $OLDPID
+sudo kill -s -HUP gunicorn
